@@ -17,7 +17,7 @@ type config struct {
 	Addr     string        `env:"ADDR"`
 	Port     int           `env:"PORT" def:"8081"`
 	ExtPort  uint32        `env:"EXT_PORT" def:"777"`
-	Timeout  time.Duration `env:"TIMEOUT"`
+	Timeout  time.Duration `env:"TIMEOUT" required:"true"`
 	IsRemote bool          `env:"IS_REMOTE" def:"true"`
 	Rate     float64       `env:"RATE" def:"0.05"`
 }

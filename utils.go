@@ -6,6 +6,7 @@ import (
 	"os"
 	"reflect"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -34,6 +35,11 @@ func ReadConfig(config interface{}) error {
 		if !ok {
 			envValue, ok = fieldTag.Lookup("def")
 			if !ok {
+				required, ok := fieldTag.Lookup("required")
+				required = strings.ToLower(strings.TrimSpace(required))
+				if ok && (required == "true" || required == "yes") {
+					return errors.New(fmt.Sprintf("'%s' must be specified", envName))
+				}
 				continue
 			}
 		}
